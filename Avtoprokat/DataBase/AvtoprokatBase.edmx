@@ -1,0 +1,469 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="IS_1_Ermolaev_AvtoprokatModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="car">
+          <Key>
+            <PropertyRef Name="car_id" />
+          </Key>
+          <Property Name="car_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="model_id" Type="int" />
+          <Property Name="year_issue" Type="int" />
+          <Property Name="price" Type="decimal" Precision="15" Scale="2" />
+        </EntityType>
+        <EntityType Name="discount">
+          <Key>
+            <PropertyRef Name="disc_id" />
+          </Key>
+          <Property Name="disc_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="disc_percent" Type="decimal" Precision="2" Scale="2" />
+          <Property Name="disc_condition" Type="decimal" Precision="15" Scale="2" />
+        </EntityType>
+        <EntityType Name="make_car">
+          <Key>
+            <PropertyRef Name="make_id" />
+          </Key>
+          <Property Name="make_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="make_name" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="model_car">
+          <Key>
+            <PropertyRef Name="model_id" />
+          </Key>
+          <Property Name="model_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="make_id" Type="int" />
+          <Property Name="make_name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="registration_plates">
+          <Key>
+            <PropertyRef Name="reg_id" />
+          </Key>
+          <Property Name="reg_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="car_id" Type="int" />
+          <Property Name="reg_plates" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="rental_car">
+          <Key>
+            <PropertyRef Name="rental_id" />
+          </Key>
+          <Property Name="rental_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="renter_id" Type="int" />
+          <Property Name="reg_id" Type="int" />
+          <Property Name="pickup_date" Type="date" />
+          <Property Name="pickpu_time" Type="time" Precision="3" />
+          <Property Name="dropoff_date" Type="date" />
+          <Property Name="dropoff_time" Type="time" Precision="3" />
+          <Property Name="disc_id" Type="int" />
+          <Property Name="amount" Type="decimal" Precision="15" Scale="2" />
+        </EntityType>
+        <EntityType Name="renter">
+          <Key>
+            <PropertyRef Name="renter_id" />
+          </Key>
+          <Property Name="renter_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="25" />
+          <Property Name="last_name" Type="varchar" MaxLength="25" />
+          <Property Name="middle_name" Type="varchar" MaxLength="25" />
+          <Property Name="license_num" Type="bigint" />
+          <Property Name="phone" Type="bigint" />
+          <Property Name="res_address" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="FK_car_model_car">
+          <End Role="model_car" Type="Self.model_car" Multiplicity="0..1" />
+          <End Role="car" Type="Self.car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="model_car">
+              <PropertyRef Name="model_id" />
+            </Principal>
+            <Dependent Role="car">
+              <PropertyRef Name="model_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_model_car_make_car">
+          <End Role="make_car" Type="Self.make_car" Multiplicity="0..1" />
+          <End Role="model_car" Type="Self.model_car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="make_car">
+              <PropertyRef Name="make_id" />
+            </Principal>
+            <Dependent Role="model_car">
+              <PropertyRef Name="make_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_registration_plates_car">
+          <End Role="car" Type="Self.car" Multiplicity="0..1" />
+          <End Role="registration_plates" Type="Self.registration_plates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="car">
+              <PropertyRef Name="car_id" />
+            </Principal>
+            <Dependent Role="registration_plates">
+              <PropertyRef Name="car_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rental_car_discount">
+          <End Role="discount" Type="Self.discount" Multiplicity="0..1" />
+          <End Role="rental_car" Type="Self.rental_car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="discount">
+              <PropertyRef Name="disc_id" />
+            </Principal>
+            <Dependent Role="rental_car">
+              <PropertyRef Name="disc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rental_car_registration_plates">
+          <End Role="registration_plates" Type="Self.registration_plates" Multiplicity="0..1" />
+          <End Role="rental_car" Type="Self.rental_car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="registration_plates">
+              <PropertyRef Name="reg_id" />
+            </Principal>
+            <Dependent Role="rental_car">
+              <PropertyRef Name="reg_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rental_car_renter">
+          <End Role="renter" Type="Self.renter" Multiplicity="0..1" />
+          <End Role="rental_car" Type="Self.rental_car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="renter">
+              <PropertyRef Name="renter_id" />
+            </Principal>
+            <Dependent Role="rental_car">
+              <PropertyRef Name="renter_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IS_1_Ermolaev_AvtoprokatModelStoreContainer">
+          <EntitySet Name="car" EntityType="Self.car" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="discount" EntityType="Self.discount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="make_car" EntityType="Self.make_car" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="model_car" EntityType="Self.model_car" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="registration_plates" EntityType="Self.registration_plates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rental_car" EntityType="Self.rental_car" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="renter" EntityType="Self.renter" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_car_model_car" Association="Self.FK_car_model_car">
+            <End Role="model_car" EntitySet="model_car" />
+            <End Role="car" EntitySet="car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_model_car_make_car" Association="Self.FK_model_car_make_car">
+            <End Role="make_car" EntitySet="make_car" />
+            <End Role="model_car" EntitySet="model_car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_registration_plates_car" Association="Self.FK_registration_plates_car">
+            <End Role="car" EntitySet="car" />
+            <End Role="registration_plates" EntitySet="registration_plates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rental_car_discount" Association="Self.FK_rental_car_discount">
+            <End Role="discount" EntitySet="discount" />
+            <End Role="rental_car" EntitySet="rental_car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rental_car_registration_plates" Association="Self.FK_rental_car_registration_plates">
+            <End Role="registration_plates" EntitySet="registration_plates" />
+            <End Role="rental_car" EntitySet="rental_car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rental_car_renter" Association="Self.FK_rental_car_renter">
+            <End Role="renter" EntitySet="renter" />
+            <End Role="rental_car" EntitySet="rental_car" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IS_1_Ermolaev_AvtoprokatModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="car">
+          <Key>
+            <PropertyRef Name="car_id" />
+          </Key>
+          <Property Name="car_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="model_id" Type="Int32" />
+          <Property Name="year_issue" Type="Int32" />
+          <Property Name="price" Type="Decimal" Precision="15" Scale="2" />
+          <NavigationProperty Name="model_car" Relationship="Self.FK_car_model_car" FromRole="car" ToRole="model_car" />
+          <NavigationProperty Name="registration_plates" Relationship="Self.FK_registration_plates_car" FromRole="car" ToRole="registration_plates" />
+        </EntityType>
+        <EntityType Name="discount">
+          <Key>
+            <PropertyRef Name="disc_id" />
+          </Key>
+          <Property Name="disc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="disc_percent" Type="Decimal" Precision="2" Scale="2" />
+          <Property Name="disc_condition" Type="Decimal" Precision="15" Scale="2" />
+          <NavigationProperty Name="rental_car" Relationship="Self.FK_rental_car_discount" FromRole="discount" ToRole="rental_car" />
+        </EntityType>
+        <EntityType Name="make_car">
+          <Key>
+            <PropertyRef Name="make_id" />
+          </Key>
+          <Property Name="make_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="make_name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="model_car" Relationship="Self.FK_model_car_make_car" FromRole="make_car" ToRole="model_car" />
+        </EntityType>
+        <EntityType Name="model_car">
+          <Key>
+            <PropertyRef Name="model_id" />
+          </Key>
+          <Property Name="model_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="make_id" Type="Int32" />
+          <Property Name="make_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="car" Relationship="Self.FK_car_model_car" FromRole="model_car" ToRole="car" />
+          <NavigationProperty Name="make_car" Relationship="Self.FK_model_car_make_car" FromRole="model_car" ToRole="make_car" />
+        </EntityType>
+        <EntityType Name="registration_plates">
+          <Key>
+            <PropertyRef Name="reg_id" />
+          </Key>
+          <Property Name="reg_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="car_id" Type="Int32" />
+          <Property Name="reg_plates" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="car" Relationship="Self.FK_registration_plates_car" FromRole="registration_plates" ToRole="car" />
+          <NavigationProperty Name="rental_car" Relationship="Self.FK_rental_car_registration_plates" FromRole="registration_plates" ToRole="rental_car" />
+        </EntityType>
+        <EntityType Name="rental_car">
+          <Key>
+            <PropertyRef Name="rental_id" />
+          </Key>
+          <Property Name="rental_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="renter_id" Type="Int32" />
+          <Property Name="reg_id" Type="Int32" />
+          <Property Name="pickup_date" Type="DateTime" Precision="0" />
+          <Property Name="pickpu_time" Type="Time" Precision="3" />
+          <Property Name="dropoff_date" Type="DateTime" Precision="0" />
+          <Property Name="dropoff_time" Type="Time" Precision="3" />
+          <Property Name="disc_id" Type="Int32" />
+          <Property Name="amount" Type="Decimal" Precision="15" Scale="2" />
+          <NavigationProperty Name="discount" Relationship="Self.FK_rental_car_discount" FromRole="rental_car" ToRole="discount" />
+          <NavigationProperty Name="registration_plates" Relationship="Self.FK_rental_car_registration_plates" FromRole="rental_car" ToRole="registration_plates" />
+          <NavigationProperty Name="renter" Relationship="Self.FK_rental_car_renter" FromRole="rental_car" ToRole="renter" />
+        </EntityType>
+        <EntityType Name="renter">
+          <Key>
+            <PropertyRef Name="renter_id" />
+          </Key>
+          <Property Name="renter_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="middle_name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="license_num" Type="Int64" />
+          <Property Name="phone" Type="Int64" />
+          <Property Name="res_address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="rental_car" Relationship="Self.FK_rental_car_renter" FromRole="renter" ToRole="rental_car" />
+        </EntityType>
+        <Association Name="FK_car_model_car">
+          <End Role="model_car" Type="Self.model_car" Multiplicity="0..1" />
+          <End Role="car" Type="Self.car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="model_car">
+              <PropertyRef Name="model_id" />
+            </Principal>
+            <Dependent Role="car">
+              <PropertyRef Name="model_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_registration_plates_car">
+          <End Role="car" Type="Self.car" Multiplicity="0..1" />
+          <End Role="registration_plates" Type="Self.registration_plates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="car">
+              <PropertyRef Name="car_id" />
+            </Principal>
+            <Dependent Role="registration_plates">
+              <PropertyRef Name="car_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rental_car_discount">
+          <End Role="discount" Type="Self.discount" Multiplicity="0..1" />
+          <End Role="rental_car" Type="Self.rental_car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="discount">
+              <PropertyRef Name="disc_id" />
+            </Principal>
+            <Dependent Role="rental_car">
+              <PropertyRef Name="disc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_model_car_make_car">
+          <End Role="make_car" Type="Self.make_car" Multiplicity="0..1" />
+          <End Role="model_car" Type="Self.model_car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="make_car">
+              <PropertyRef Name="make_id" />
+            </Principal>
+            <Dependent Role="model_car">
+              <PropertyRef Name="make_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rental_car_registration_plates">
+          <End Role="registration_plates" Type="Self.registration_plates" Multiplicity="0..1" />
+          <End Role="rental_car" Type="Self.rental_car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="registration_plates">
+              <PropertyRef Name="reg_id" />
+            </Principal>
+            <Dependent Role="rental_car">
+              <PropertyRef Name="reg_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rental_car_renter">
+          <End Role="renter" Type="Self.renter" Multiplicity="0..1" />
+          <End Role="rental_car" Type="Self.rental_car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="renter">
+              <PropertyRef Name="renter_id" />
+            </Principal>
+            <Dependent Role="rental_car">
+              <PropertyRef Name="renter_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AvtoprokatEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="car" EntityType="Self.car" />
+          <EntitySet Name="discount" EntityType="Self.discount" />
+          <EntitySet Name="make_car" EntityType="Self.make_car" />
+          <EntitySet Name="model_car" EntityType="Self.model_car" />
+          <EntitySet Name="registration_plates" EntityType="Self.registration_plates" />
+          <EntitySet Name="rental_car" EntityType="Self.rental_car" />
+          <EntitySet Name="renter" EntityType="Self.renter" />
+          <AssociationSet Name="FK_car_model_car" Association="Self.FK_car_model_car">
+            <End Role="model_car" EntitySet="model_car" />
+            <End Role="car" EntitySet="car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_registration_plates_car" Association="Self.FK_registration_plates_car">
+            <End Role="car" EntitySet="car" />
+            <End Role="registration_plates" EntitySet="registration_plates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rental_car_discount" Association="Self.FK_rental_car_discount">
+            <End Role="discount" EntitySet="discount" />
+            <End Role="rental_car" EntitySet="rental_car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_model_car_make_car" Association="Self.FK_model_car_make_car">
+            <End Role="make_car" EntitySet="make_car" />
+            <End Role="model_car" EntitySet="model_car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rental_car_registration_plates" Association="Self.FK_rental_car_registration_plates">
+            <End Role="registration_plates" EntitySet="registration_plates" />
+            <End Role="rental_car" EntitySet="rental_car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rental_car_renter" Association="Self.FK_rental_car_renter">
+            <End Role="renter" EntitySet="renter" />
+            <End Role="rental_car" EntitySet="rental_car" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IS_1_Ermolaev_AvtoprokatModelStoreContainer" CdmEntityContainer="AvtoprokatEntities">
+          <EntitySetMapping Name="car">
+            <EntityTypeMapping TypeName="IS_1_Ermolaev_AvtoprokatModel.car">
+              <MappingFragment StoreEntitySet="car">
+                <ScalarProperty Name="car_id" ColumnName="car_id" />
+                <ScalarProperty Name="model_id" ColumnName="model_id" />
+                <ScalarProperty Name="year_issue" ColumnName="year_issue" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="discount">
+            <EntityTypeMapping TypeName="IS_1_Ermolaev_AvtoprokatModel.discount">
+              <MappingFragment StoreEntitySet="discount">
+                <ScalarProperty Name="disc_id" ColumnName="disc_id" />
+                <ScalarProperty Name="disc_percent" ColumnName="disc_percent" />
+                <ScalarProperty Name="disc_condition" ColumnName="disc_condition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="make_car">
+            <EntityTypeMapping TypeName="IS_1_Ermolaev_AvtoprokatModel.make_car">
+              <MappingFragment StoreEntitySet="make_car">
+                <ScalarProperty Name="make_id" ColumnName="make_id" />
+                <ScalarProperty Name="make_name" ColumnName="make_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="model_car">
+            <EntityTypeMapping TypeName="IS_1_Ermolaev_AvtoprokatModel.model_car">
+              <MappingFragment StoreEntitySet="model_car">
+                <ScalarProperty Name="model_id" ColumnName="model_id" />
+                <ScalarProperty Name="make_id" ColumnName="make_id" />
+                <ScalarProperty Name="make_name" ColumnName="make_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="registration_plates">
+            <EntityTypeMapping TypeName="IS_1_Ermolaev_AvtoprokatModel.registration_plates">
+              <MappingFragment StoreEntitySet="registration_plates">
+                <ScalarProperty Name="reg_id" ColumnName="reg_id" />
+                <ScalarProperty Name="car_id" ColumnName="car_id" />
+                <ScalarProperty Name="reg_plates" ColumnName="reg_plates" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rental_car">
+            <EntityTypeMapping TypeName="IS_1_Ermolaev_AvtoprokatModel.rental_car">
+              <MappingFragment StoreEntitySet="rental_car">
+                <ScalarProperty Name="rental_id" ColumnName="rental_id" />
+                <ScalarProperty Name="renter_id" ColumnName="renter_id" />
+                <ScalarProperty Name="reg_id" ColumnName="reg_id" />
+                <ScalarProperty Name="pickup_date" ColumnName="pickup_date" />
+                <ScalarProperty Name="pickpu_time" ColumnName="pickpu_time" />
+                <ScalarProperty Name="dropoff_date" ColumnName="dropoff_date" />
+                <ScalarProperty Name="dropoff_time" ColumnName="dropoff_time" />
+                <ScalarProperty Name="disc_id" ColumnName="disc_id" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="renter">
+            <EntityTypeMapping TypeName="IS_1_Ermolaev_AvtoprokatModel.renter">
+              <MappingFragment StoreEntitySet="renter">
+                <ScalarProperty Name="renter_id" ColumnName="renter_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
+                <ScalarProperty Name="license_num" ColumnName="license_num" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="res_address" ColumnName="res_address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

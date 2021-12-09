@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="68f30158c14c4e7f926ed7a2ea340228" Name="Diagram1">
+        <EntityTypeShape EntityType="IS_1_Ermolaev_AvtoprokatModel.car" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IS_1_Ermolaev_AvtoprokatModel.discount" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IS_1_Ermolaev_AvtoprokatModel.make_car" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IS_1_Ermolaev_AvtoprokatModel.model_car" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IS_1_Ermolaev_AvtoprokatModel.registration_plates" Width="1.5" PointX="7.5" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IS_1_Ermolaev_AvtoprokatModel.rental_car" Width="1.5" PointX="9.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="IS_1_Ermolaev_AvtoprokatModel.renter" Width="1.5" PointX="7.5" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="IS_1_Ermolaev_AvtoprokatModel.FK_car_model_car" ManuallyRouted="false" />
+        <AssociationConnector Association="IS_1_Ermolaev_AvtoprokatModel.FK_registration_plates_car" ManuallyRouted="false" />
+        <AssociationConnector Association="IS_1_Ermolaev_AvtoprokatModel.FK_rental_car_discount" ManuallyRouted="false" />
+        <AssociationConnector Association="IS_1_Ermolaev_AvtoprokatModel.FK_model_car_make_car" ManuallyRouted="false" />
+        <AssociationConnector Association="IS_1_Ermolaev_AvtoprokatModel.FK_rental_car_registration_plates" ManuallyRouted="false" />
+        <AssociationConnector Association="IS_1_Ermolaev_AvtoprokatModel.FK_rental_car_renter" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
