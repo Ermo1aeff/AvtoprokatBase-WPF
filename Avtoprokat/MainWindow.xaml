@@ -7,14 +7,19 @@
         mc:Ignorable="d"
         Title="Автопрокат" Height="450" Width="800" Topmost="True">
     <Grid>
-        <Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="160"/>
+        </Grid.ColumnDefinitions>
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="35"/>
             <RowDefinition Height="35"/>
             <RowDefinition/>
-        </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Row="0">
-            <Button Content="Модели" Click="ShowModelPage" Height="25" Margin="10 0 0 0"/>
-            <Button Content="Марки" Click="ShowMakePage" Height="25" Margin="10 0 0 0"/>
+        </Grid.RowDefinitions>-->
+        <StackPanel Orientation="Vertical" Grid.Row="0">
+            <Button Content="Экземпляры авто" Click="ShowModelPage" Height="25" Margin="10 0 10 10"/>
+            <Button Content="Модели" Click="ShowModelPage" Height="25" Margin="10 0 10 10"/>
+            <Button Content="Марки" Click="ShowMakePage" Height="25" Margin="10 0 10 10"/>
         </StackPanel>
         <Rectangle Fill="Black" Height="1" VerticalAlignment="Bottom" Grid.Row="1"/>
 
