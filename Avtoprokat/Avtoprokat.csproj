@@ -115,6 +115,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\CarNumPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CarPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DiscountPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\MakePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -123,14 +135,37 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\RentalPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RenterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MakeSource.cs" />
+    <Compile Include="Pages\CarNumPage.xaml.cs">
+      <DependentUpon>CarNumPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RenterPage.xaml.cs">
+      <DependentUpon>RenterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SourceCore.cs" />
+    <Compile Include="Pages\CarPage.xaml.cs">
+      <DependentUpon>CarPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DiscountPage.xaml.cs">
+      <DependentUpon>DiscountPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MakePage.xaml.cs">
       <DependentUpon>MakePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ModelPage.xaml.cs">
       <DependentUpon>ModelPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RentalPage.xaml.cs">
+      <DependentUpon>RentalPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -169,6 +204,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="7.jpg" />
     <Content Include="DataBase\AvtoprokatBase.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>AvtoprokatBase.edmx</DependentUpon>

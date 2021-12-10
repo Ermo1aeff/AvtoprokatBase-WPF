@@ -9,13 +9,9 @@
       Title="Test">
 
     <Grid>
-        <DataGrid x:Name="MakeCar" Background="Aqua">
-            <DataGrid.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="+"/>
-                    <MenuItem Header="-"/>
-                </ContextMenu>
-            </DataGrid.ContextMenu>
+        <DataGrid x:Name="MakeCar" AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGridTextColumn Header="Ключ" Binding="{Binding Path=make_id}" Width="10*"/>
+            <DataGridTextColumn Header="Производитель" Binding="{Binding Path=make_name}" Width="10*"/>
         </DataGrid>
     </Grid>
 </Page>

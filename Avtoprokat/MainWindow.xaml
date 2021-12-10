@@ -5,30 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Avtoprokat"
         mc:Ignorable="d"
-        Title="Автопрокат" Height="450" Width="800" Topmost="True">
+        Title="Автопрокат &quot;Чёткие Тачки&quot;" Height="450" Width="800" Topmost="True">
     <Grid>
-
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="160"/>
+            <ColumnDefinition Width="130" MinWidth="110" MaxWidth="250"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*" MinWidth="300"/>
         </Grid.ColumnDefinitions>
-        <!--<Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="35"/>
-            <RowDefinition Height="35"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>-->
-        <StackPanel Orientation="Vertical" Grid.Row="0">
-            <Button Content="Экземпляры авто" Click="ShowModelPage" Height="25" Margin="10 0 10 10"/>
-            <Button Content="Модели" Click="ShowModelPage" Height="25" Margin="10 0 10 10"/>
-            <Button Content="Марки" Click="ShowMakePage" Height="25" Margin="10 0 10 10"/>
-        </StackPanel>
-        <Rectangle Fill="Black" Height="1" VerticalAlignment="Bottom" Grid.Row="1"/>
+        </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <Button Content="+" Click="AddElement" Height="25" Width="25" Margin="10 0 0 0"/>
-            <Button Content="-" Click="DeleteElement" Height="25" Width="25" Margin="10 0 0 0"/>
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Background="Beige" >
+            <Image Source="7.jpg" Width="120" Height="90" Margin="0,5,0,0"/>
+            <Button x:Name="RentalButton" Click="ShowRentalPage"
+                    Content="Заказы" Height="25" Margin="5,5,5,0"/>
+            <Button x:Name="RenterButton" Click="ShowRenterPage"
+                    Content="Клиенты" Height="25" Margin="5,5,5,0"/>
+            <Button x:Name="CarNumButton" Click="ShowCarNumPage"
+                    Content="Автомобили" Height="25" Margin="5,5,5,0"/>
+            <Button x:Name="CarButton" Click="ShowCarPage"
+                    Content="Экземпляры авто" Height="25" Margin="5,5,5,0"/>
+            <Button x:Name="ModelButton" Click="ShowModelPage"
+                    Content="Модели" Height="25" Margin="5,5,5,0"/>
+            <Button x:Name="MakeButton" Click="ShowMakePage"
+                    Content="Произвадители" Height="25" Margin="5,5,5,0"/>
+            <Button x:Name="DiscountButton" Click="ShowDiscountPage"
+                    Content="Скидка" Height="25" Margin="5,5,5,0"/>
         </StackPanel>
-        <Rectangle Fill="Black" Height="1" VerticalAlignment="Bottom"/>
 
-        <Frame Grid.Row="2" NavigationUIVisibility="Hidden" x:Name="AvtoprokatFrame"/>
+        <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" 
+                      Width="3" HorizontalAlignment="Stretch" />
+
+        <Frame x:Name="RootFrame" Grid.Column="2" Grid.Row="0" NavigationUIVisibility="Hidden"/>
+
+        <Rectangle Grid.Column="2" Grid.Row="1" Fill="Beige" />
+        <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left">
+            <Button x:Name="PreviosPageButton" Content="Назад" Width="75"
+                    Margin="5,5,0,5" />
+            <Button x:Name="NextPageButton" Content="Вперед" Width="75" 
+                    Margin="5,5,0,5" />
+        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="ClosePageButton" Content="Закрыть страницу" 
+                    Width="120" Margin="5" />
+        </StackPanel>
+
     </Grid>
+
 </Window>

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\4-ИС-1\Ермолаев Е. А\WPF Поект\Avtoprokat\Avtoprokat\DataBase\AvtoprokatBase.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\4-ИС-1\Ермолаев Е. А\WPF Поект\AvtoprokatBase\Avtoprokat\DataBase\AvtoprokatBase.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

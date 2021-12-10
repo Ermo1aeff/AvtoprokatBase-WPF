@@ -5,11 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="68f30158c14c4e7f926ed7a2ea340228" Name="Diagram1">
-        <EntityTypeShape EntityType="IS_1_Ermolaev_AvtoprokatModel.car" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IS_1_Ermolaev_AvtoprokatModel.car" Width="1.5" PointX="4.875" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="IS_1_Ermolaev_AvtoprokatModel.discount" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="IS_1_Ermolaev_AvtoprokatModel.make_car" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="IS_1_Ermolaev_AvtoprokatModel.model_car" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="IS_1_Ermolaev_AvtoprokatModel.registration_plates" Width="1.5" PointX="7.5" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IS_1_Ermolaev_AvtoprokatModel.registration_plates" Width="2.5" PointX="6.875" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="IS_1_Ermolaev_AvtoprokatModel.rental_car" Width="1.5" PointX="9.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="IS_1_Ermolaev_AvtoprokatModel.renter" Width="1.5" PointX="7.5" PointY="7.75" IsExpanded="true" />
         <AssociationConnector Association="IS_1_Ermolaev_AvtoprokatModel.FK_car_model_car" ManuallyRouted="false" />

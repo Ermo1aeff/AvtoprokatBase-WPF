@@ -16,15 +16,15 @@ using System.Windows.Shapes;
 namespace Avtoprokat.Pages
 {
     /// <summary>
-    /// Interaction logic for ModelPage.xaml
+    /// Interaction logic for CarNumPage.xaml
     /// </summary>
-    public partial class ModelPage : Page
+    public partial class CarNumPage : Page
     {
-        public ModelPage()
+        public CarNumPage()
         {
             InitializeComponent();
             DataContext = this;
-            ModelCar.ItemsSource = MakeSource.entities.model_car.ToList();
+            CarNum.ItemsSource = MakeSource.entities.registration_plates.ToList();
         }
     }
 }

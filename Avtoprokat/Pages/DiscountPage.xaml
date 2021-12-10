@@ -1,0 +1,20 @@
+﻿<Page x:Class="Avtoprokat.Pages.DiscountPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Avtoprokat.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DiscountPage">
+
+    <Grid>
+        <DataGrid  x:Name="Discount" AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Ключ" Binding="{Binding Path=disc_id}" Width="10*"/>
+                <DataGridTextColumn Header="Скидки" Binding="{Binding Path=disc_percent}" Width="10*"/>
+                <DataGridTextColumn Header="Условие скидки" Binding="{Binding Path=disc_condition}" Width="10*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

@@ -25,24 +25,39 @@ namespace Avtoprokat
             InitializeComponent();
         }
 
+        private void ShowRentalPage(object sender, RoutedEventArgs e)
+        {
+            RootFrame.Navigate(new Pages.RentalPage());
+        }
+
+        private void ShowRenterPage(object sender, RoutedEventArgs e)
+        {
+            RootFrame.Navigate(new Pages.ModelPage());
+        }
+
+        private void ShowCarNumPage(object sender, RoutedEventArgs e)
+        {
+            RootFrame.Navigate(new Pages.CarNumPage());
+        }
+
+        private void ShowCarPage(object sender, RoutedEventArgs e)
+        {
+            RootFrame.Navigate(new Pages.CarPage());
+        }
+
         private void ShowModelPage(object sender, RoutedEventArgs e)
         {
-            AvtoprokatFrame.Navigate(new Pages.ModelPage());
+            RootFrame.Navigate(new Pages.ModelPage());
         }
 
         private void ShowMakePage(object sender, RoutedEventArgs e)
         {
-            AvtoprokatFrame.Navigate(new Pages.MakePage());
+            RootFrame.Navigate(new Pages.MakePage());
         }
 
-        private void AddElement(object sender, RoutedEventArgs e)
+        private void ShowDiscountPage(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void DeleteElement(object sender, RoutedEventArgs e)
-        {
-
+            RootFrame.Navigate(new Pages.DiscountPage());
         }
     }
 }
