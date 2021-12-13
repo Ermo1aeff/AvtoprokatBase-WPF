@@ -8,9 +8,84 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CarPage">
 
+
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#e28743"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="BorderBrush" Value="#e28743"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Page.Resources>
+
     <Grid>
-        <DataGrid  x:Name="Car" AutoGenerateColumns="False" CanUserAddRows="False">
-            
-        </DataGrid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="250"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="250" MinWidth="250" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Экземпляры авто" Grid.ColumnSpan="3" FontSize="15" Background="#eab676"/>
+
+        <DockPanel x:Name="ReadersDataGridDockPanel" Grid.Row="1" Grid.Column="0" 
+                   Grid.ColumnSpan="3" Background="#eab676">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Height="30" Background="#eab676">
+                <Button x:Name="AddReaderButton" Content="Новый" Width="75"/>
+                <Button x:Name="CopyReaderButton" Content="Копировать" Width="100"/>
+                <Button x:Name="EditReaderButton" Content="Изменить" Width="75"/>
+                <Button x:Name="DeleteReaderButton" Content="Удалить" Width="75"/>
+            </StackPanel>
+
+            <DockPanel DockPanel.Dock="Top" Background="#eab676">
+                <Label Content="Поиск:" Background="#eab676" FontSize="15"/>
+                <ComboBox x:Name="FilterComboBox" Width="120"/>
+                <!--SelectionChanged="FilterComboBox_SelectionChanged" />-->
+                <TextBox x:Name="FilterTextBox" Background="Wheat" FontSize="15"/>
+                <!--TextChanged="FilterTextBox_TextChanged"/>-->
+            </DockPanel>
+
+            <DockPanel>
+                <StackPanel x:Name="PhotoStackPanel" DockPanel.Dock="Right" Width="Auto">
+                    <Border Background="LightGray" BorderThickness="1" BorderBrush="Gray">
+                    </Border>
+                </StackPanel>
+
+                <DataGrid x:Name="Car" AutoGenerateColumns="False" CanUserAddRows="False" 
+                          Background="Wheat" AlternatingRowBackground="Wheat" RowBackground="#FFEAB676" FontSize="15">
+                    <!--MouseDoubleClick="EditReaderButton_Click"-->
+                    <!--SelectionChanged="ReadersDataGrid_SelectionChanged">-->
+                    <DataGrid.Resources>
+                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="#e28743" />
+                            <Setter Property="Height" Value="25" />
+                            <Setter Property="FontSize" Value="15" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Style>
+                        <Style TargetType="ScrollBar">
+                            <Setter Property="Background" Value="Wheat" />
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Производитель" Binding="{Binding Path=model_car.make_car.make_name}" Width="10*"/>
+                        <DataGridTextColumn Header="Модель" Binding="{Binding Path=model_car.model_name}" Width="10*"/>
+                        <DataGridTextColumn Header="Год производства" Binding="{Binding Path=year_issue}" Width="10*"/>
+                        <DataGridTextColumn Header="Цена за час" Binding="{Binding Path=price}" Width="10*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </DockPanel>
+
+        <GridSplitter x:Name="DialogGridSplitter" Grid.Column="1" Grid.Row="1"
+                      HorizontalAlignment="Center" Width="3" Visibility="Hidden"/>
+
+        <ScrollViewer x:Name="DialogScrollViewer" Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" 
+                      Visibility="Hidden" VerticalScrollBarVisibility="Auto" >
+            <Frame x:Name="DialogFrame" />
+        </ScrollViewer>
     </Grid>
 </Page>

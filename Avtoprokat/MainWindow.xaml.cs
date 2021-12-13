@@ -32,7 +32,7 @@ namespace Avtoprokat
 
         private void ShowRenterPage(object sender, RoutedEventArgs e)
         {
-            RootFrame.Navigate(new Pages.ModelPage());
+            RootFrame.Navigate(new Pages.RenterPage());
         }
 
         private void ShowCarNumPage(object sender, RoutedEventArgs e)

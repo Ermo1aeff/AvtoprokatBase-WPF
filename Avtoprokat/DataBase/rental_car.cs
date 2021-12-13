@@ -18,9 +18,7 @@ namespace Avtoprokat.DataBase
         public Nullable<int> renter_id { get; set; }
         public Nullable<int> reg_id { get; set; }
         public Nullable<System.DateTime> pickup_date { get; set; }
-        public Nullable<System.TimeSpan> pickpu_time { get; set; }
         public Nullable<System.DateTime> dropoff_date { get; set; }
-        public Nullable<System.TimeSpan> dropoff_time { get; set; }
         public Nullable<int> disc_id { get; set; }
         public Nullable<decimal> amount { get; set; }
     

@@ -24,7 +24,7 @@ namespace Avtoprokat.Pages
         {
             InitializeComponent();
             DataContext = this;
-            Car.ItemsSource = MakeSource.entities.rental_car.ToList();
+            Car.ItemsSource = MakeSource.entities.car.ToList();
         }
     }
 }

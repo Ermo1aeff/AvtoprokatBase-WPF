@@ -22,7 +22,7 @@ namespace Avtoprokat.DataBase
     
         public int model_id { get; set; }
         public Nullable<int> make_id { get; set; }
-        public string make_name { get; set; }
+        public string model_name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<car> car { get; set; }

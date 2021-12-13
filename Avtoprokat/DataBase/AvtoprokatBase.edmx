@@ -35,7 +35,7 @@
           </Key>
           <Property Name="model_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="make_id" Type="int" />
-          <Property Name="make_name" Type="varchar" MaxLength="50" />
+          <Property Name="model_name" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="registration_plates">
           <Key>
@@ -53,9 +53,7 @@
           <Property Name="renter_id" Type="int" />
           <Property Name="reg_id" Type="int" />
           <Property Name="pickup_date" Type="date" />
-          <Property Name="pickpu_time" Type="time" Precision="3" />
           <Property Name="dropoff_date" Type="date" />
-          <Property Name="dropoff_time" Type="time" Precision="3" />
           <Property Name="disc_id" Type="int" />
           <Property Name="amount" Type="decimal" Precision="15" Scale="2" />
         </EntityType>
@@ -214,9 +212,9 @@
           </Key>
           <Property Name="model_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="make_id" Type="Int32" />
-          <Property Name="make_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="car" Relationship="Self.FK_car_model_car" FromRole="model_car" ToRole="car" />
           <NavigationProperty Name="make_car" Relationship="Self.FK_model_car_make_car" FromRole="model_car" ToRole="make_car" />
+          <Property Name="model_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="registration_plates">
           <Key>
@@ -236,9 +234,7 @@
           <Property Name="renter_id" Type="Int32" />
           <Property Name="reg_id" Type="Int32" />
           <Property Name="pickup_date" Type="DateTime" Precision="0" />
-          <Property Name="pickpu_time" Type="Time" Precision="3" />
           <Property Name="dropoff_date" Type="DateTime" Precision="0" />
-          <Property Name="dropoff_time" Type="Time" Precision="3" />
           <Property Name="disc_id" Type="Int32" />
           <Property Name="amount" Type="Decimal" Precision="15" Scale="2" />
           <NavigationProperty Name="discount" Relationship="Self.FK_rental_car_discount" FromRole="rental_car" ToRole="discount" />
@@ -399,9 +395,9 @@
           <EntitySetMapping Name="model_car">
             <EntityTypeMapping TypeName="IS_1_Ermolaev_AvtoprokatModel.model_car">
               <MappingFragment StoreEntitySet="model_car">
+                <ScalarProperty Name="model_name" ColumnName="model_name" />
                 <ScalarProperty Name="model_id" ColumnName="model_id" />
                 <ScalarProperty Name="make_id" ColumnName="make_id" />
-                <ScalarProperty Name="make_name" ColumnName="make_name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -421,9 +417,7 @@
                 <ScalarProperty Name="renter_id" ColumnName="renter_id" />
                 <ScalarProperty Name="reg_id" ColumnName="reg_id" />
                 <ScalarProperty Name="pickup_date" ColumnName="pickup_date" />
-                <ScalarProperty Name="pickpu_time" ColumnName="pickpu_time" />
                 <ScalarProperty Name="dropoff_date" ColumnName="dropoff_date" />
-                <ScalarProperty Name="dropoff_time" ColumnName="dropoff_time" />
                 <ScalarProperty Name="disc_id" ColumnName="disc_id" />
                 <ScalarProperty Name="amount" ColumnName="amount" />
               </MappingFragment>
