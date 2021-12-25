@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Avtoprokat.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="CarNumPage">
+      Title="CarNumPage"
+      Background="#eab676">
 
     <Page.Resources>
         <Style TargetType="Button">
@@ -16,35 +17,53 @@
             <Setter Property="BorderBrush" Value="#e28743"/>
             <Setter Property="Foreground" Value="White"/>
         </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="Wheat"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="BorderBrush" Value="#e28743"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="BorderBrush" Value="#e28743"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
     </Page.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" MinWidth="250"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="250" MinWidth="250" />
+            <ColumnDefinition x:Name="CarNumColumnChange" Width="230" MaxWidth="230"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Label Content="Автомобили" Grid.ColumnSpan="3" FontSize="15" Background="#eab676"/>
-
         <DockPanel x:Name="ReadersDataGridDockPanel" Grid.Row="1" Grid.Column="0" 
-                   Grid.ColumnSpan="3" Background="#eab676">
-            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Height="30" Background="#eab676">
-                <Button x:Name="AddReaderButton" Content="Новый" Width="75"/>
-                <Button x:Name="CopyReaderButton" Content="Копировать" Width="100"/>
-                <Button x:Name="EditReaderButton" Content="Изменить" Width="75"/>
-                <Button x:Name="DeleteReaderButton" Content="Удалить" Width="75"/>
+                   Grid.ColumnSpan="2" Background="#eab676">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Height="30" Background="#eab676" Grid.ColumnSpan="3">
+                <Label Content="Экземпляры автомобилей" FontSize="15" Background="#eab676"/>
+            </StackPanel>
+
+
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Height="30" Background="#eab676" Grid.ColumnSpan="3">
+                <Button x:Name="AddCarNumButton" Content="Новый" Width="75" Click="Add_Click"/>
+                <Button x:Name="CopyCarNumButton" Content="Копировать" Width="100" Click="Copy_Click"/>
+                <Button x:Name="EditCarNumButton" Content="Изменить" Width="75" Click="Edit_Click"/>
+                <Button x:Name="DeleteCarNumButton" Content="Удалить" Width="75" Click="Delete_Click"/>
             </StackPanel>
 
             <DockPanel DockPanel.Dock="Top" Background="#eab676">
                 <Label Content="Поиск:" Background="#eab676" FontSize="15"/>
                 <ComboBox x:Name="FilterComboBox" Width="120"/>
                 <!--SelectionChanged="FilterComboBox_SelectionChanged" />-->
-                <TextBox x:Name="FilterTextBox" Background="Wheat" FontSize="15"/>
+                <TextBox x:Name="FilterTextBox" Background="Wheat" FontSize="15" Height="30"/>
                 <!--TextChanged="FilterTextBox_TextChanged"/>-->
             </DockPanel>
 
@@ -80,13 +99,35 @@
             </DockPanel>
         </DockPanel>
 
-        <GridSplitter x:Name="DialogGridSplitter" Grid.Column="1" Grid.Row="1"
-                      HorizontalAlignment="Center" Width="3" Visibility="Hidden"/>
+        <GridSplitter x:Name="DialogGridSplitter" Grid.Column="1" Grid.Row="2"
+                      HorizontalAlignment="Stretch" Width="3" Background="#e28743"/>
 
-        <ScrollViewer x:Name="DialogScrollViewer" Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" 
-                      Visibility="Hidden" VerticalScrollBarVisibility="Auto" >
-            <Frame x:Name="DialogFrame" />
-        </ScrollViewer>
+        <Label x:Name="CarNumTitle" Content="Новый экземпляр" Grid.Column="2" VerticalAlignment="Top" Foreground="Black" HorizontalAlignment="Center"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Center" Height="320">
+            <Label Content="Производитель"/>
+            <ComboBox x:Name="CarNumComboBoxMake" Text="{Binding ElementName=RegPlatesDataGrid, Path=SelectedItem.make_name}"
+                     Width="150" />
+            <Label Content="Модель"/>
+            <ComboBox x:Name="CarNumComboBoxModel" Text="{Binding ElementName=RegPlatesDataGrid, Path=SelectedItem.model_name}"
+                     Width="150"/>
+            <Label Content="Рег. номер"/>
+            <TextBox x:Name="CarNumTextRegPlates" Text="{Binding ElementName=RegPlatesDataGrid, Path=SelectedItem.reg_plates}"
+                     Width="150"/>
+            <Label Content="Год выпуска"/>
+            <TextBox x:Name="CarNumTextYearIssue" Text="{Binding ElementName=RegPlatesDataGrid, Path=SelectedItem.year_issue}"
+                     Width="150"/>
+            <Label Content="Цена за час"/>
+            <TextBox x:Name="CarNumTextPrice" Text="{Binding ElementName=RegPlatesDataGrid, Path=SelectedItem.price}"
+                     Width="150"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
+                <Button x:Name="CopyAddCommit" Content="Добавить" 
+                    Height="30" Width="100" Margin="0,5,0,5" Click="CarNumCommit_Click"/>
+                <Button x:Name="CopyAddRollback" Content="Отменить" 
+                    Height="30" Width="100" Margin="5,5,0,5" Click="CarNumRollback_Click"/>
+            </StackPanel>
+        </StackPanel>
 
     </Grid>
 </Page>

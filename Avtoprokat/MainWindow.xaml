@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Avtoprokat"
         mc:Ignorable="d"
         Title="Автопрокат" Height="450" Width="800" Topmost="True"
-        MinWidth="540" MinHeight="340">
+        MinWidth="750" MinHeight="450">
 
     <Window.Resources>
         <Style TargetType="Button">
@@ -41,7 +41,7 @@
         </StackPanel>
 
         <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" 
-                      Width="1" HorizontalAlignment="Stretch" Background="#eab676"/>
+                      Width="3" HorizontalAlignment="Stretch" Background="#eab676"/>
 
         <Frame x:Name="RootFrame" Grid.Column="2" Grid.Row="0" NavigationUIVisibility="Hidden"/>
 
