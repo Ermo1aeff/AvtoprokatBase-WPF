@@ -111,6 +111,9 @@
     <Compile Include="DataBase\renter.cs">
       <DependentUpon>AvtoprokatBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataBase\status.cs">
+      <DependentUpon>AvtoprokatBase.tt</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

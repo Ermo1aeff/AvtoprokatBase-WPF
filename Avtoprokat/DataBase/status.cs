@@ -12,22 +12,18 @@ namespace Avtoprokat.DataBase
     using System;
     using System.Collections.Generic;
     
-    public partial class registration_plates
+    public partial class status
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public registration_plates()
+        public status()
         {
-            this.rental_car = new HashSet<rental_car>();
+            this.registration_plates = new HashSet<registration_plates>();
         }
     
-        public int reg_id { get; set; }
-        public Nullable<int> car_id { get; set; }
-        public string reg_plates { get; set; }
-        public Nullable<int> status_id { get; set; }
+        public int status1 { get; set; }
+        public string status_name { get; set; }
     
-        public virtual car car { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<rental_car> rental_car { get; set; }
-        public virtual status status { get; set; }
+        public virtual ICollection<registration_plates> registration_plates { get; set; }
     }
 }

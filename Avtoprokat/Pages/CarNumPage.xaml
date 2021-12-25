@@ -107,19 +107,19 @@
         <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Center" Height="320">
             <Label Content="Производитель"/>
             <ComboBox x:Name="CarNumComboBoxMake" Text="{Binding ElementName=RegPlatesDataGrid, Path=SelectedItem.make_name}"
-                     Width="150" />
+                     Width="150" Foreground="Black"/>
             <Label Content="Модель"/>
             <ComboBox x:Name="CarNumComboBoxModel" Text="{Binding ElementName=RegPlatesDataGrid, Path=SelectedItem.model_name}"
-                     Width="150"/>
+                     Width="150" Foreground="Black"/>
             <Label Content="Рег. номер"/>
             <TextBox x:Name="CarNumTextRegPlates" Text="{Binding ElementName=RegPlatesDataGrid, Path=SelectedItem.reg_plates}"
-                     Width="150"/>
+                     Width="150" Foreground="Black"/>
             <Label Content="Год выпуска"/>
             <TextBox x:Name="CarNumTextYearIssue" Text="{Binding ElementName=RegPlatesDataGrid, Path=SelectedItem.year_issue}"
-                     Width="150"/>
+                     Width="150" Foreground="Black"/>
             <Label Content="Цена за час"/>
             <TextBox x:Name="CarNumTextPrice" Text="{Binding ElementName=RegPlatesDataGrid, Path=SelectedItem.price}"
-                     Width="150"/>
+                     Width="150" Foreground="Black"/>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
                 <Button x:Name="CopyAddCommit" Content="Добавить" 

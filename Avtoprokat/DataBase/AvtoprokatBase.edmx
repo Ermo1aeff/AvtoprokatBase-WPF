@@ -44,6 +44,7 @@
           <Property Name="reg_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="car_id" Type="int" />
           <Property Name="reg_plates" Type="varchar" MaxLength="10" />
+          <Property Name="status_id" Type="int" />
         </EntityType>
         <EntityType Name="rental_car">
           <Key>
@@ -68,6 +69,13 @@
           <Property Name="license_num" Type="bigint" />
           <Property Name="phone" Type="bigint" />
           <Property Name="res_address" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="status" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status_name" Type="varchar" MaxLength="20" />
         </EntityType>
         <Association Name="FK_car_model_car">
           <End Role="model_car" Type="Self.model_car" Multiplicity="0..1" />
@@ -102,6 +110,18 @@
             </Principal>
             <Dependent Role="registration_plates">
               <PropertyRef Name="car_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_registration_plates_status">
+          <End Role="status" Type="Self.status" Multiplicity="0..1" />
+          <End Role="registration_plates" Type="Self.registration_plates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="status" />
+            </Principal>
+            <Dependent Role="registration_plates">
+              <PropertyRef Name="status_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -149,6 +169,7 @@
           <EntitySet Name="registration_plates" EntityType="Self.registration_plates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rental_car" EntityType="Self.rental_car" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="renter" EntityType="Self.renter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="status" EntityType="Self.status" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_car_model_car" Association="Self.FK_car_model_car">
             <End Role="model_car" EntitySet="model_car" />
             <End Role="car" EntitySet="car" />
@@ -159,6 +180,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_registration_plates_car" Association="Self.FK_registration_plates_car">
             <End Role="car" EntitySet="car" />
+            <End Role="registration_plates" EntitySet="registration_plates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_registration_plates_status" Association="Self.FK_registration_plates_status">
+            <End Role="status" EntitySet="status" />
             <End Role="registration_plates" EntitySet="registration_plates" />
           </AssociationSet>
           <AssociationSet Name="FK_rental_car_discount" Association="Self.FK_rental_car_discount">
@@ -225,6 +250,8 @@
           <Property Name="reg_plates" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="car" Relationship="Self.FK_registration_plates_car" FromRole="registration_plates" ToRole="car" />
           <NavigationProperty Name="rental_car" Relationship="Self.FK_rental_car_registration_plates" FromRole="registration_plates" ToRole="rental_car" />
+          <Property Name="status_id" Type="Int32" />
+          <NavigationProperty Name="status" Relationship="IS_1_Ermolaev_AvtoprokatModel.FK_registration_plates_status" FromRole="registration_plates" ToRole="status" />
         </EntityType>
         <EntityType Name="rental_car">
           <Key>
@@ -358,7 +385,32 @@
             <End Role="renter" EntitySet="renter" />
             <End Role="rental_car" EntitySet="rental_car" />
           </AssociationSet>
+          <EntitySet Name="status" EntityType="IS_1_Ermolaev_AvtoprokatModel.status" />
+          <AssociationSet Name="FK_registration_plates_status" Association="IS_1_Ermolaev_AvtoprokatModel.FK_registration_plates_status">
+            <End Role="status" EntitySet="status" />
+            <End Role="registration_plates" EntitySet="registration_plates" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="status1" />
+          </Key>
+          <Property Name="status1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="registration_plates" Relationship="IS_1_Ermolaev_AvtoprokatModel.FK_registration_plates_status" FromRole="status" ToRole="registration_plates" />
+        </EntityType>
+        <Association Name="FK_registration_plates_status">
+          <End Type="IS_1_Ermolaev_AvtoprokatModel.status" Role="status" Multiplicity="0..1" />
+          <End Type="IS_1_Ermolaev_AvtoprokatModel.registration_plates" Role="registration_plates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="status1" />
+            </Principal>
+            <Dependent Role="registration_plates">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -404,6 +456,7 @@
           <EntitySetMapping Name="registration_plates">
             <EntityTypeMapping TypeName="IS_1_Ermolaev_AvtoprokatModel.registration_plates">
               <MappingFragment StoreEntitySet="registration_plates">
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
                 <ScalarProperty Name="reg_id" ColumnName="reg_id" />
                 <ScalarProperty Name="car_id" ColumnName="car_id" />
                 <ScalarProperty Name="reg_plates" ColumnName="reg_plates" />
@@ -433,6 +486,14 @@
                 <ScalarProperty Name="license_num" ColumnName="license_num" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="res_address" ColumnName="res_address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="status">
+            <EntityTypeMapping TypeName="IS_1_Ermolaev_AvtoprokatModel.status">
+              <MappingFragment StoreEntitySet="status">
+                <ScalarProperty Name="status_name" ColumnName="status_name" />
+                <ScalarProperty Name="status1" ColumnName="status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

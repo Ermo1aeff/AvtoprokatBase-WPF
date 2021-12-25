@@ -42,6 +42,7 @@ namespace Avtoprokat.Pages
             if (b == true)
             {
                 CarNumColumnChange.Width = new GridLength(230);
+                //Включаем кнопки
                 CarNum.IsHitTestVisible = false;
                 AddCarNumButton.IsEnabled = false;
                 CopyCarNumButton.IsEnabled = false;
@@ -51,6 +52,7 @@ namespace Avtoprokat.Pages
             else
             {
                 CarNumColumnChange.Width = new GridLength(0);
+                //Выключаем кнопки
                 CarNum.IsHitTestVisible = true;
                 AddCarNumButton.IsEnabled = true;
                 CopyCarNumButton.IsEnabled = true;
@@ -126,15 +128,12 @@ namespace Avtoprokat.Pages
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            if (CarNum.SelectedItem != null)
+            if (MessageBox.Show("Удалить запись?", "Внимание", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
             {
-                CarNumDlgLoad(true);
-                CarNumTitle.Content = "Удалить экзепляр";
-            }
-            else
-            {
-                MessageBox.Show("Не выбрано ни одной строки!", "Сообщение", MessageBoxButton.OK);
+                MakeSource.entities.registration_plates.Remove((DataBase.registration_plates)CarNum.SelectedItem);
+                MakeSource.entities.SaveChanges();
             }
         }
+
     }
 }

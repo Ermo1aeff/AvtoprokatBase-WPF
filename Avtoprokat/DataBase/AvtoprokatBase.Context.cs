@@ -32,5 +32,6 @@ namespace Avtoprokat.DataBase
         public virtual DbSet<registration_plates> registration_plates { get; set; }
         public virtual DbSet<rental_car> rental_car { get; set; }
         public virtual DbSet<renter> renter { get; set; }
+        public virtual DbSet<status> status { get; set; }
     }
 }
