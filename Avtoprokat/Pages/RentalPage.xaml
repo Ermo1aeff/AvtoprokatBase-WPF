@@ -1,0 +1,115 @@
+﻿<Page x:Class="Avtoprokat.Pages.RentalPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Avtoprokat.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RentalPage">
+
+
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#e28743"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="BorderBrush" Value="#e28743"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="250"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="250" MinWidth="250" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Автомобили" Grid.ColumnSpan="3" FontSize="15" Background="#eab676"/>
+
+        <DockPanel x:Name="ReadersDataGridDockPanel" Grid.Row="1" Grid.Column="0" 
+                   Grid.ColumnSpan="3" Background="#eab676">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Height="30" Background="#eab676">
+                <Button x:Name="AddReaderButton" Content="Новый" Width="75"/>
+                <Button x:Name="CopyReaderButton" Content="Копировать" Width="100"/>
+                <Button x:Name="EditReaderButton" Content="Изменить" Width="75"/>
+                <Button x:Name="DeleteReaderButton" Content="Удалить" Width="75"/>
+            </StackPanel>
+
+            <DockPanel DockPanel.Dock="Top" Background="#eab676">
+                <Label Content="Поиск:" Background="#eab676" FontSize="15"/>
+                <ComboBox x:Name="FilterComboBox" Width="120"/>
+                <!--SelectionChanged="FilterComboBox_SelectionChanged" />-->
+                <TextBox x:Name="FilterTextBox" Background="Wheat" FontSize="15"/>
+                <!--TextChanged="FilterTextBox_TextChanged"/>-->
+            </DockPanel>
+
+            <DockPanel>
+                <StackPanel x:Name="PhotoStackPanel" DockPanel.Dock="Right" Width="Auto">
+                    <Border Background="LightGray" BorderThickness="1" BorderBrush="Gray">
+                    </Border>
+                </StackPanel>
+
+                <DataGrid x:Name="Rental" AutoGenerateColumns="False" CanUserAddRows="False" 
+                          Background="Wheat" AlternatingRowBackground="Wheat" RowBackground="#FFEAB676" FontSize="15" AlternationCount="2">
+                    <!--MouseDoubleClick="EditReaderButton_Click"-->
+                    <!--SelectionChanged="ReadersDataGrid_SelectionChanged">-->
+                    <DataGrid.Resources>
+                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="#e28743" />
+                            <Setter Property="Height" Value="25" />
+                            <Setter Property="FontSize" Value="15" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Style>
+                        <Style TargetType="ScrollBar">
+                            <Setter Property="Background" Value="Wheat" />
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Фамилия" Binding="{Binding renter.first_name}" Width="6*" />
+                        <DataGridTextColumn Header="Имя" Binding="{Binding renter.last_name}" Width="6*"/>
+                        <DataGridTextColumn Header="Отчество" Binding="{Binding Path=renter.middle_name}" Width="6*"/>
+
+                        <DataGridTemplateColumn Width="90">
+                            <DataGridTemplateColumn.Header>
+                                Дата аренды
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding pickup_date}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Width="90">
+                            <DataGridTemplateColumn.Header>
+                                Дата возврата
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding dropoff_date}" OpacityMask="{x:Null}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Header="Скидка" Binding="{Binding Path=discount.disc_percent}" Width="4*"/>
+                        <DataGridTextColumn Header="Итого" Binding="{Binding Path=amount}" Width="4*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </DockPanel>
+
+        <GridSplitter x:Name="DialogGridSplitter" Grid.Column="1" Grid.Row="1"
+                      HorizontalAlignment="Center" Width="3" Visibility="Hidden"/>
+
+        <ScrollViewer x:Name="DialogScrollViewer" Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" 
+                      Visibility="Hidden" VerticalScrollBarVisibility="Auto" >
+            <Frame x:Name="DialogFrame" />
+        </ScrollViewer>
+    </Grid>
+</Page>

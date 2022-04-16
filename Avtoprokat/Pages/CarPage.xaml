@@ -1,0 +1,133 @@
+﻿<Page x:Class="Avtoprokat.Pages.CarPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Avtoprokat.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CarPage"
+      Background = "#eab676">
+
+
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#e28743"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="BorderBrush" Value="#e28743"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="Wheat"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="BorderBrush" Value="#e28743"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="BorderBrush" Value="#e28743"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="22"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="BorderBrush" Value="#e28743"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="250"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition x:Name="CarNumColumnChange" Width="230" MaxWidth="0"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel x:Name="ReadersDataGridDockPanel" Grid.Row="1" Grid.Column="0" 
+                   Grid.ColumnSpan="2">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Height="30" Grid.ColumnSpan="3">
+                <Label Content="Автомобили" FontSize="15"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Height="30">
+                <Button x:Name="AddReaderButton" Content="Новый" Width="75"/>
+                <Button x:Name="CopyReaderButton" Content="Копировать" Width="100"/>
+                <Button x:Name="EditReaderButton" Content="Изменить" Width="75"/>
+                <Button x:Name="DeleteReaderButton" Content="Удалить" Width="75"/>
+            </StackPanel>
+        
+            <DockPanel DockPanel.Dock="Top">
+                <Label Content="Поиск:" FontSize="15"/>
+                <ComboBox x:Name="FilterComboBox" Width="120" Height="auto"/>
+                <!--SelectionChanged="FilterComboBox_SelectionChanged" />-->
+                <TextBox x:Name="FilterTextBox" FontSize="15" Height="30" Width="auto"/>
+                <!--TextChanged="FilterTextBox_TextChanged"/>-->
+            </DockPanel>
+
+            <DockPanel>
+                <StackPanel x:Name="PhotoStackPanel" DockPanel.Dock="Right" Width="Auto">
+                    <Border Background="LightGray" BorderThickness="1" BorderBrush="Gray">
+                    </Border>
+                </StackPanel>
+
+                <DataGrid x:Name="Car" AutoGenerateColumns="False" CanUserAddRows="False" 
+                          Background="Wheat" AlternatingRowBackground="Wheat" RowBackground="#FFEAB676" FontSize="15">
+                    
+                    <DataGrid.Resources>
+                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="#e28743" />
+                            <Setter Property="Height" Value="25" />
+                            <Setter Property="FontSize" Value="15" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Style>
+                        <Style TargetType="ScrollBar">
+                            <Setter Property="Background" Value="Wheat" />
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Производитель" Binding="{Binding Path=model_car.make_car.make_name}" Width="10*"/>
+                        <DataGridTextColumn Header="Модель" Binding="{Binding Path=model_car.model_name}" Width="10*"/>
+                        <DataGridTextColumn Header="Год производства" Binding="{Binding Path=year_issue}" Width="10*"/>
+                        <DataGridTextColumn Header="Цена за час" Binding="{Binding Path=price}" Width="10*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </DockPanel>
+
+        <GridSplitter x:Name="DialogGridSplitter" Grid.Column="1" Grid.Row="2"
+                      HorizontalAlignment="Stretch" Width="3" Background="#e28743"/>
+
+        <Label x:Name="CarNumTitle" Content="Новыое авто" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Center" Height="320">
+            <Label Content="Производитель"/>
+            <ComboBox x:Name="CarNumComboBoxMake" Text="{Binding ElementName=RegPlatesDataGrid, Path=SelectedItem.make_name}"/>
+            <Label Content="Модель"/>
+            <ComboBox x:Name="CarNumComboBoxModel" Text="{Binding ElementName=RegPlatesDataGrid, Path=SelectedItem.model_name}"/>
+            <Label Content="Цена за час"/>
+            <TextBox x:Name="CarNumTextPrice" Text="{Binding ElementName=RegPlatesDataGrid, Path=SelectedItem.reg_plates}"/>
+            <Label Content="Год выпуска"/>
+            <TextBox x:Name="CarNumTextYearIssue" Text="{Binding ElementName=RegPlatesDataGrid, Path=SelectedItem.year_issue}"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
+                <Button x:Name="CopyAddCommit" Content="Добавить" 
+                    Height="30" Width="100" Margin="0,5,0,5" Click="CarNumCommit_Click"/>
+                <Button x:Name="CopyAddRollback" Content="Отменить" 
+                    Height="30" Width="100" Margin="5,5,0,5" Click="CarNumRollback_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

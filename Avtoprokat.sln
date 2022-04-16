@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avtoprokat", "Avtoprokat\Avtoprokat.csproj", "{8B942605-B934-46AC-AED5-75042051C773}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8B942605-B934-46AC-AED5-75042051C773}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B942605-B934-46AC-AED5-75042051C773}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B942605-B934-46AC-AED5-75042051C773}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B942605-B934-46AC-AED5-75042051C773}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {54EB7597-4B1A-4AF2-B274-0B54D09A4D1E}
+	EndGlobalSection
+EndGlobal
